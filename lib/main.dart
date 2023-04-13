@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/ui_kit/app_icon.dart';
 import 'package:flutter_project/ui_kit/app_assets.dart';
 import 'package:flutter_project/ui_kit/app_theme.dart';
+import 'package:flutter_project/ui_kit/app_text_style.dart';
 
 void main() {
   runApp(const MyApp());
@@ -73,8 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Text(
               'You have pushed the button this many times:',
+              style: AppTextStyle.h1Style,
             ),
             Text(
               '$_counter',

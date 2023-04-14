@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' hide Badge;
 // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
+import 'package:flutter_project/data/app_data.dart';
 
 class FoodList extends StatefulWidget {
   const FoodList({super.key});
@@ -13,6 +14,8 @@ class FoodList extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodList> {
+  var categories = AppData.categories;
+  
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: _appBar(context),
@@ -35,7 +38,7 @@ class FoodListState extends State<FoodList> {
                 "Available for you",
                 style: Theme.of(context).textTheme.displaySmall,
               ),
-              _categories(context),
+              _categories(),
               Padding(
                 padding: const EdgeInsets.only(top: 25, bottom: 5),
                 child: Row(
@@ -62,8 +65,6 @@ class FoodListState extends State<FoodList> {
           ),
         ),
       ));
-}
-
 PreferredSizeWidget _appBar(BuildContext context) {
   return AppBar(
     leading: IconButton(
@@ -109,7 +110,7 @@ Widget _searchBar() {
   );
 }
 
-Widget _categories(BuildContext context) {
+Widget _categories() {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
     child: SizedBox(
@@ -117,22 +118,24 @@ Widget _categories(BuildContext context) {
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (_, index) {
+            final category = AppData.categories[index];
             return GestureDetector(
               onTap: () {
-                // ignore: avoid_print
-                print('Кликнули на категорию');
+                onCategoryTap(index);
               },
               child: Container(
                 width: 100,
                 alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                  color: LightThemeColor.accent,
-                  borderRadius: BorderRadius.all(
+                decoration: BoxDecoration(
+                  color: category.isSelected
+                      ? LightThemeColor.accent
+                      : Colors.transparent,
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(15),
                   ),
                 ),
                 child: Text(
-                  'Kebab',
+                  category.type.name,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
@@ -141,7 +144,17 @@ Widget _categories(BuildContext context) {
           separatorBuilder: (_, __) => Container(
                 width: 15,
               ),
-          itemCount: 20),
+          itemCount: AppData.categories.length),
     ),
   );
 }
+
+void onCategoryTap(int selectedIndex) {
+  //Меняем выбранную категорию
+  AppData.categories.asMap().forEach((index, category) {
+    category.isSelected = index == selectedIndex;
+  });
+  setState(() {});
+}
+}
+

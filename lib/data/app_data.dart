@@ -187,3 +187,4 @@ class AppData {
     FoodCategory(FoodType.burger, false),
   ];
 }
+

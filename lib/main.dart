@@ -3,6 +3,7 @@ import 'package:flutter_project/ui_kit/app_icon.dart';
 import 'package:flutter_project/ui_kit/app_assets.dart';
 import 'package:flutter_project/ui_kit/app_theme.dart';
 import 'package:flutter_project/ui_kit/app_text_style.dart';
+import 'package:flutter_project/ui/screens/food_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Japan Eat',
       theme: AppTheme.darkTheme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: FoodList(),
     );
   }
 }

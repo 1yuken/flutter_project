@@ -271,5 +271,17 @@ static List<Food> favoriteItems = [
   ),
 ];
 
+static Food food = Food(
+  AppAsset.sushi12,
+  "Sushi12",
+  20.0,
+  1,
+  false,
+  dummyText,
+  5.0,
+  FoodType.tempura,
+  560,
+);
+
 }
 

@@ -26,7 +26,8 @@ class CartScreenState extends State<CartScreen> {
       bottomNavigationBar: _bottomAppBar(),
     );
   }
-    PreferredSizeWidget _appBar(BuildContext context) {
+
+  PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       title: Text(
         "Cart screen",
@@ -36,19 +37,21 @@ class CartScreenState extends State<CartScreen> {
   }
 
   Widget _cartListView() {
-  return ListView.separated(
-    padding: const EdgeInsets.all(30),
-    itemCount: cartFood.length,
-    itemBuilder: (_, index) {
-      return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.white,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return ListView.separated(
+      padding: const EdgeInsets.all(30),
+      itemCount: cartFood.length,
+      itemBuilder: (_, index) {
+        return Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.white
+                : DarkThemeColor.primaryLight,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const SizedBox(width: 20),
               Image.asset(cartFood[index].image, scale: 10),
@@ -88,28 +91,116 @@ class CartScreenState extends State<CartScreen> {
                   ),
                   Text(
                     "\$10",
-                    style: AppTextStyle.h2Style.copyWith(color: 
-                    LightThemeColor.accent),
+                    style: AppTextStyle.h2Style
+                        .copyWith(color: LightThemeColor.accent),
                   )
                 ],
               )
             ],
-        ),
-      );
-    },
-    separatorBuilder: (_, __) => Container(
-      height: 20,
-    ),
-  );
-}
-
-  Widget _bottomAppBar() {
-    return BottomAppBar(
-        child: SizedBox(
-            height: 300,
-            child: Container(
-              color: Colors.white,
-            )));
+          ),
+        );
+      },
+      separatorBuilder: (_, __) => Container(
+        height: 20,
+      ),
+    );
   }
 
+  Widget _bottomAppBar() {
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(30),
+        topRight: Radius.circular(30),
+      ),
+      child: BottomAppBar(
+          child: SizedBox(
+              height: 250,
+              child: Container(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? DarkThemeColor.primaryLight
+                    : Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(30),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Subtotal",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              Text(
+                                "\$111",
+                                style:
+                                    Theme.of(context).textTheme.displayMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Taxes",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              Text(
+                                "\$${5.00}",
+                                style:
+                                    Theme.of(context).textTheme.displayMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Divider(thickness: 4.0, height: 30.0),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Total",
+                                style:
+                                    Theme.of(context).textTheme.displayMedium,
+                              ),
+                              Text(
+                                "\$120.0",
+                                style: AppTextStyle.h2Style.copyWith(
+                                  color: LightThemeColor.accent,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 30),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 45,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: const Text("Checkout"),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ))),
+    );
+  }
 }

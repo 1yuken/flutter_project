@@ -5,6 +5,7 @@ import 'package:flutter/material.dart' hide Badge;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
 import 'package:flutter_project/data/app_data.dart';
+import 'package:flutter_project/ui/extensions/app_extension.dart';
 
 class FoodList extends StatefulWidget {
   const FoodList({super.key});
@@ -135,7 +136,7 @@ Widget _categories() {
                   ),
                 ),
                 child: Text(
-                  category.type.name,
+                  category.type.name.toCapital,
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),

@@ -23,8 +23,22 @@ class AppTheme {
       bodyLarge: AppTextStyle.bodyTextLight,
       titleMedium: AppTextStyle.subtitleLight,
     ),
+      hintColor: Colors.black45,
+      inputDecorationTheme: const InputDecorationTheme(
+      border: OutlineInputBorder(borderSide: BorderSide.none),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25)),
+        borderSide: BorderSide(color: Colors.transparent),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25)),
+        borderSide: BorderSide(color: Colors.transparent),
+      ),
+      filled: true,
+      contentPadding: EdgeInsets.all(20),
+      fillColor: Colors.white,
+    ),
   );
-
   static ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: DarkThemeColor.primaryDark,
     appBarTheme: AppBarTheme(
@@ -43,6 +57,20 @@ class AppTheme {
       headlineSmall: AppTextStyle.h5StyleLight.copyWith(color: Colors.white),
       bodyLarge: AppTextStyle.bodyTextLight.copyWith(color: Colors.white),
       titleMedium: AppTextStyle.subtitleLight.copyWith(color: Colors.white60),
+    ),
+      hintColor: Colors.white60,
+      inputDecorationTheme: const InputDecorationTheme(
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25)),
+        borderSide: BorderSide(color: Colors.transparent),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(25)),
+        borderSide: BorderSide(color: Colors.transparent),
+      ),
+      filled: true,
+      contentPadding: EdgeInsets.all(20),
+      fillColor: DarkThemeColor.primaryLight,
     ),
   );
 }

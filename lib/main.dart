@@ -4,6 +4,7 @@ import 'package:flutter_project/ui_kit/app_assets.dart';
 import 'package:flutter_project/ui_kit/app_theme.dart';
 import 'package:flutter_project/ui_kit/app_text_style.dart';
 import 'package:flutter_project/ui/screens/food_list_screen.dart';
+import 'package:flutter_project/ui/screens/cart_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,8 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Japan Eat',
-      theme: AppTheme.darkTheme,
-      home: const FoodList(),
+      theme: AppTheme.lightTheme,
+      home: const CartScreen(),
     );
   }
 }

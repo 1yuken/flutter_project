@@ -1,5 +1,7 @@
+// ignore: depend_on_referenced_packages
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
+// ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../ui_kit/_ui_kit.dart';
 
@@ -33,6 +35,7 @@ class FoodListState extends State<FoodList> {
                 "Available for you",
                 style: Theme.of(context).textTheme.displaySmall,
               ),
+              _categories(context),
               Padding(
                 padding: const EdgeInsets.only(top: 25, bottom: 5),
                 child: Row(
@@ -106,3 +109,39 @@ Widget _searchBar() {
   );
 }
 
+Widget _categories(BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8.0),
+    child: SizedBox(
+      height: 40,
+      child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (_, index) {
+            return GestureDetector(
+              onTap: () {
+                // ignore: avoid_print
+                print('Кликнули на категорию');
+              },
+              child: Container(
+                width: 100,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                  color: LightThemeColor.accent,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
+                  ),
+                ),
+                child: Text(
+                  'Kebab',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+            );
+          },
+          separatorBuilder: (_, __) => Container(
+                width: 15,
+              ),
+          itemCount: 20),
+    ),
+  );
+}

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/ui_kit/app_color.dart';
 import '../../data/models/food.dart';
 
 class FoodListView extends StatelessWidget {
-  const FoodListView({
-super.key, 
-required this.foods, 
-this.isReversed = false
-  });
+  const FoodListView({super.key, required this.foods, this.isReversed = false});
 
   final List<Food> foods;
   final bool isReversed;
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
       height: 200,
       child: ListView.separated(
@@ -21,9 +20,10 @@ this.isReversed = false
           itemBuilder: (_, index) {
             return Container(
               width: 160,
-              decoration: const BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+              decoration: BoxDecoration(
+                color: isDark ? 
+                DarkThemeColor.primaryLight : Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
             );
           },

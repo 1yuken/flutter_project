@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/ui/screens/profile_screen.dart';
 
 import '../../data/app_data.dart';
+import '../../states/food_state.dart';
 import 'cart_screen.dart';
 import 'favorite_screen.dart';
 import 'food_list_screen.dart';
@@ -40,11 +41,10 @@ class HomeScreenState extends State<HomeScreen> {
     
   }
   final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
-  int currentIndex = 0;
+  int get currentIndex => FoodState().currentIndex;
 
-  void onTabTap(int index) {
-    if (currentIndex == index) return;
-    currentIndex = index;
+  void onTabTap(int index) async {
+    await FoodState().onTabTap(index);
     setState(() {});
   }
 

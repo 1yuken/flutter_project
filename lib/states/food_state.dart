@@ -12,6 +12,7 @@ class FoodState {
 
   final List<FoodCategory> _categories = AppData.categories;
   List<FoodCategory> get categories => _categories;
+  List<int> cartIds = [];
 
   int _selectedCategoryIndex = 0;
   int get selectedCategoryIndex => _selectedCategoryIndex;

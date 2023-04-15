@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/ui/widgets/empty_wrapper.dart';
 import '../../data/app_data.dart';
+import '../../states/food_state.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../widgets/counter_button.dart';
@@ -13,6 +14,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class CartScreenState extends State<CartScreen> {
+  List<int> get cartIds => FoodState().cartIds;
   var cartFood = AppData.cartItems;
   @override
   Widget build(BuildContext context) {
@@ -20,10 +22,10 @@ class CartScreenState extends State<CartScreen> {
       appBar: _appBar(context),
       body: EmptyWrapper(
         title: "Empty cart",
-        isEmpty: cartFood.isEmpty,
+        isEmpty: cartIds.isEmpty,
         child: _cartListView(),
       ),
-      bottomNavigationBar: _bottomAppBar(),
+      bottomNavigationBar: cartIds.isEmpty ? const SizedBox() : _bottomAppBar(),
     );
   }
 

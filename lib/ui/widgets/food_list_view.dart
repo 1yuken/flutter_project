@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/ui_kit/app_color.dart';
 import '../../data/models/food.dart';
 import '../../ui_kit/app_text_style.dart';
+import '../screens/food_detail_screen.dart';
 
 class FoodListView extends StatelessWidget {
   const FoodListView({super.key, required this.foods, this.isReversed = false});
@@ -26,6 +27,11 @@ class FoodListView extends StatelessWidget {
               onTap: () {
                 // ignore: avoid_print
                 print('Клик на карточку');
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const FoodDetail()
+                  ),
+                );
               },
               child: Container(
                 width: 160,

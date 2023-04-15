@@ -15,6 +15,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<CartScreenState> _cartKey = GlobalKey();
+  late final List<Widget> screens = [
+    const FoodList(),
+    CartScreen(
+      key: _cartKey,
+    ),
+    const FavoriteScreen(),
+    const ProfileScreen()
+  ];
+  int get currentIndex => FoodState().currentIndex;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +37,8 @@ class HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: onTabTap,
-        selectedFontSize: 0,items: AppData.bottomNavigationItems.map(
+        selectedFontSize: 0,
+        items: AppData.bottomNavigationItems.map(
           (element) {
             return BottomNavigationBarItem(
               icon: element.disableIcon,
@@ -38,14 +49,11 @@ class HomeScreenState extends State<HomeScreen> {
         ).toList(),
       ),
     );
-    
   }
-  final List<Widget> screens = [const FoodList(), const CartScreen(), const FavoriteScreen(), const ProfileScreen()];
-  int get currentIndex => FoodState().currentIndex;
 
   void onTabTap(int index) async {
     await FoodState().onTabTap(index);
     setState(() {});
+    if (index == 1) _cartKey.currentState?.update();
   }
-
 }

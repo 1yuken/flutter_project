@@ -42,6 +42,11 @@ class FoodDetailState extends State<FoodDetail> {
     setState(() {});
   }
 
+  void onAddToCart() async {
+    await FoodState().onAddToCartTap(foodId, _amount);
+  }
+
+
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       // leading: IconButton(
@@ -159,7 +164,7 @@ Widget _bottomAppBar() {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
                             child: ElevatedButton(
-                              onPressed: (){},
+                              onPressed: onAddToCart,
                               child: const Text("Add to cart"),
                             ),
                           ),

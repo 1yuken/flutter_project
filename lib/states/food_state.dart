@@ -73,4 +73,15 @@ class FoodState {
     }
     return subtotal;
   }
+
+  Future<void> onIncrementTap(int id) async {
+    final food = foodById(id);
+    food.quantity = food.quantity + 1;
+  }
+
+  Future<void> onDecrementTap(int id) async {
+    final food = foodById(id);
+    if (food.quantity == 1) return;
+    food.quantity = food.quantity - 1;
+  }
 }

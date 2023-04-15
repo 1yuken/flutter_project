@@ -17,6 +17,22 @@ class CartScreenState extends State<CartScreen> {
   List<int> get cartIds => FoodState().cartIds;
   var cartFood = AppData.cartItems;
   double get subtotal => FoodState().calculateSubtotalPrice();
+
+  void update() {
+    setState(() {});
+  }
+
+  void onIncrementTap(int id) async {
+  await FoodState().onIncrementTap(id);
+  setState(() {});
+}
+
+  void onDecrementTap(int id) async {
+  await FoodState().onDecrementTap(id);
+  setState(() {});
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,10 +44,6 @@ class CartScreenState extends State<CartScreen> {
       ),
       bottomNavigationBar: cartIds.isEmpty ? const SizedBox() : _bottomAppBar(),
     );
-  }
-
-  void update() {
-    setState(() {});
   }
 
   PreferredSizeWidget _appBar(BuildContext context) {
@@ -82,14 +94,8 @@ class CartScreenState extends State<CartScreen> {
               Column(
                 children: [
                   CounterButton(
-                    onIncrementTap: () {
-                      // ignore: avoid_print
-                      print('Нажали на увеличение количества');
-                    },
-                    onDecrementTap: () {
-                      // ignore: avoid_print
-                      print('Нажали на уменьшение количества');
-                    },
+                    onIncrementTap: () => onIncrementTap(cartIds[index]),
+                    onDecrementTap: () => onDecrementTap(cartIds[index]),
                     size: const Size(24, 24),
                     padding: 0,
                     label: Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/ui/screens/food_detail_screen.dart';
+import 'package:flutter_project/ui/screens/home_screen.dart';
 import 'package:flutter_project/ui/screens/profile_screen.dart';
 import 'package:flutter_project/ui_kit/app_icon.dart';
 import 'package:flutter_project/ui_kit/app_assets.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Japan Eat',
       theme: AppTheme.darkTheme,
-      home: const FoodDetail(),
+      home: const HomeScreen(),
     );
   }
 }

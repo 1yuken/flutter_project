@@ -47,6 +47,13 @@ class AppTheme {
         ),
       ),
     ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.white,
+      selectedItemColor: LightThemeColor.accent,
+    ),
+    iconTheme: const IconThemeData(color: Colors.black45),
+    bottomAppBarTheme: const BottomAppBarTheme(color: Colors.white),
   );
 
 
@@ -90,6 +97,16 @@ class AppTheme {
           LightThemeColor.accent,
         ),
       ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: DarkThemeColor.primaryLight,
+      selectedItemColor: LightThemeColor.accent,
+      unselectedItemColor: Colors.white70,
+    ),
+    iconTheme: const IconThemeData(color: Colors.white),
+    bottomAppBarTheme: const BottomAppBarTheme(
+      color: DarkThemeColor.primaryLight,
     ),
   );
 }

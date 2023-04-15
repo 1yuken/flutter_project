@@ -21,6 +21,7 @@ class AppData {
 
   static List<Food> foodItems = [
     Food(
+      1,
       AppAsset.sushi1,
       "Sushi1",
       10.0,
@@ -32,6 +33,7 @@ class AppData {
       150,
     ),
     Food(
+      2,
       AppAsset.sushi2,
       "Sushi2",
       15.0,
@@ -43,6 +45,7 @@ class AppData {
       652,
     ),
     Food(
+      3,
       AppAsset.sushi3,
       "Sushi3",
       20.0,
@@ -54,6 +57,7 @@ class AppData {
       723,
     ),
     Food(
+      4,
       AppAsset.sushi4,
       "Sushi4",
       40.0,
@@ -65,6 +69,7 @@ class AppData {
       456,
     ),
     Food(
+      5,
       AppAsset.sushi5,
       "Sushi5",
       10.0,
@@ -76,6 +81,7 @@ class AppData {
       650,
     ),
     Food(
+      6,
       AppAsset.sushi6,
       "Sushi6",
       20.0,
@@ -87,6 +93,7 @@ class AppData {
       350,
     ),
     Food(
+      7,
       AppAsset.sushi7,
       "Sushi7",
       12.0,
@@ -98,6 +105,7 @@ class AppData {
       265,
     ),
     Food(
+      8,
       AppAsset.sushi8,
       "Sushi8",
       30.0,
@@ -109,6 +117,7 @@ class AppData {
       890,
     ),
     Food(
+      9,
       AppAsset.sushi9,
       "Sushi9",
       10.0,
@@ -120,6 +129,7 @@ class AppData {
       900,
     ),
     Food(
+      10,
       AppAsset.sushi10,
       "Sushi10",
       15.0,
@@ -131,6 +141,7 @@ class AppData {
       420,
     ),
     Food(
+      11,
       AppAsset.sushi11,
       "Sushi11",
       25.0,
@@ -142,6 +153,7 @@ class AppData {
       263,
     ),
     Food(
+      12,
       AppAsset.sushi12,
       "Sushi12",
       20.0,
@@ -189,6 +201,7 @@ class AppData {
 
   static List<Food> cartItems = [
   Food(
+    10,
     AppAsset.sushi10,
     "Sushi10",
     15.0,
@@ -200,6 +213,7 @@ class AppData {
     420,
   ),
   Food(
+    11,
     AppAsset.sushi11,
     "Sushi11",
     25.0,
@@ -211,6 +225,7 @@ class AppData {
     263,
   ),
   Food(
+    12,
     AppAsset.sushi12,
     "Sushi12",
     20.0,
@@ -226,6 +241,7 @@ class AppData {
 
 static List<Food> favoriteItems = [
   Food(
+    5,
     AppAsset.sushi5,
     "Sushi5",
     10.0,
@@ -237,6 +253,7 @@ static List<Food> favoriteItems = [
     650,
   ),
   Food(
+    6,
     AppAsset.sushi6,
     "Sushi6",
     20.0,
@@ -248,6 +265,7 @@ static List<Food> favoriteItems = [
     350,
   ),
   Food(
+    7,
     AppAsset.sushi7,
     "Sushi7",
     12.0,
@@ -259,6 +277,7 @@ static List<Food> favoriteItems = [
     265,
   ),
   Food(
+    8,
     AppAsset.sushi8,
     "Sushi8",
     30.0,
@@ -272,6 +291,7 @@ static List<Food> favoriteItems = [
 ];
 
 static Food food = Food(
+  12,
   AppAsset.sushi12,
   "Sushi12",
   20.0,

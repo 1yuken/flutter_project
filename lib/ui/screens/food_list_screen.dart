@@ -19,6 +19,8 @@ class FoodList extends StatefulWidget {
 
 class FoodListState extends State<FoodList> {
   List<FoodCategory> get categories => FoodState().categories;
+  List<int> get foodIdsByCategory => FoodState().foodIdsByCategory;
+  List<int> get foodIds => FoodState().foodIds;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -43,7 +45,9 @@ class FoodListState extends State<FoodList> {
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 _categories(),
-                FoodListView(foods: AppData.foodItems),
+                FoodListView(
+                  foodIds: foodIdsByCategory,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 25, bottom: 5),
                   child: Row(
@@ -66,7 +70,7 @@ class FoodListState extends State<FoodList> {
                     ],
                   ),
                 ),
-                FoodListView(foods: AppData.foodItems, isReversed: true),
+                FoodListView(foodIds: foodIds, isReversed: true),
               ],
             ),
           ),

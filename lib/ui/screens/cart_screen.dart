@@ -5,6 +5,7 @@ import '../../states/food_state.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_text_style.dart';
 import '../widgets/counter_button.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -55,13 +56,43 @@ class CartScreenState extends State<CartScreen> {
     );
   }
 
+  void onDeleteFoodFromCartById(int id) async {
+  await FoodState().onDeleteFoodFromCartById(id);
+  setState(() {});
+}
+
   Widget _cartListView() {
-    return ListView.separated(
-      padding: const EdgeInsets.all(30),
-      itemCount: cartIds.length,
-      itemBuilder: (_, index) {
-        final food = FoodState().foodById(cartIds[index]);
-        return Container(
+  return ListView.separated(
+    padding: const EdgeInsets.all(30),
+    itemCount: cartIds.length,
+    itemBuilder: (_, index) {
+      final food = FoodState().foodById(cartIds[index]);
+      return Dismissible(
+        direction: DismissDirection.endToStart,
+        onDismissed: (direction) {
+          if (direction == DismissDirection.endToStart) {
+            print('Удаляем');
+            onDeleteFoodFromCartById(food.id);
+          }
+        },
+        key: UniqueKey(),
+        background: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 25,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.redAccent,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: const FaIcon(FontAwesomeIcons.trash),
+            ),
+          ],
+        ),
+        child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
@@ -112,13 +143,14 @@ class CartScreenState extends State<CartScreen> {
               )
             ],
           ),
-        );
-      },
-      separatorBuilder: (_, __) => Container(
-        height: 20,
-      ),
-    );
-  }
+        ),
+      );
+    },
+    separatorBuilder: (_, __) => Container(
+      height: 20,
+    ),
+  );
+}
 
   Widget _bottomAppBar() {
     return ClipRRect(

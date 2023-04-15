@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/app_data.dart';
 import '../../data/models/food.dart';
+import '../../states/food_state.dart';
 import '../../ui_kit/app_color.dart';
 import '../../ui_kit/app_icon.dart';
 import '../widgets/empty_wrapper.dart';
@@ -14,6 +15,7 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class FavoriteScreenState extends State<FavoriteScreen> {
+  List<int> get favoriteIds => FoodState().favoriteIds;
   var favoriteFood = AppData.favoriteItems;
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
       body: EmptyWrapper(
         type: EmptyWrapperType.favorite,
         title: 'Empty favorite',
-        isEmpty: favoriteFood.isEmpty,
+        isEmpty: favoriteIds.isEmpty,
         child: _favoriteListView(),
       ),
     );

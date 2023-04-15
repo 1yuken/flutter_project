@@ -51,13 +51,17 @@ class FoodState {
   }
 
   Future<void> onFoodTap(int id) async {
-  selectedFoodId = id;
-}
+    selectedFoodId = id;
+  }
 
   Future<void> onAddToCartTap(int id, int amount) async {
-  if (!cartIds.contains(id)) cartIds.add(id);
-  foods[id]?.quantity = amount;
-}
+    if (!cartIds.contains(id)) cartIds.add(id);
+    foods[id]?.quantity = amount;
+  }
 
-
+  String calculatePricePerEachItem(Food food) {
+    double price = 0;
+    price = food.quantity * food.price;
+    return price.toString();
+  }
 }

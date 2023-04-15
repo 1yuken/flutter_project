@@ -24,15 +24,14 @@ class CartScreenState extends State<CartScreen> {
   }
 
   void onIncrementTap(int id) async {
-  await FoodState().onIncrementTap(id);
-  setState(() {});
-}
+    await FoodState().onIncrementTap(id);
+    setState(() {});
+  }
 
   void onDecrementTap(int id) async {
-  await FoodState().onDecrementTap(id);
-  setState(() {});
-}
-
+    await FoodState().onDecrementTap(id);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,100 +56,105 @@ class CartScreenState extends State<CartScreen> {
   }
 
   void onDeleteFoodFromCartById(int id) async {
-  await FoodState().onDeleteFoodFromCartById(id);
-  setState(() {});
-}
+    await FoodState().onDeleteFoodFromCartById(id);
+    setState(() {});
+  }
+
+  void onCleanCart() async {
+    await FoodState().onCleanCart();
+    setState(() {});
+  }
 
   Widget _cartListView() {
-  return ListView.separated(
-    padding: const EdgeInsets.all(30),
-    itemCount: cartIds.length,
-    itemBuilder: (_, index) {
-      final food = FoodState().foodById(cartIds[index]);
-      return Dismissible(
-        direction: DismissDirection.endToStart,
-        onDismissed: (direction) {
-          if (direction == DismissDirection.endToStart) {
-            print('Удаляем');
-            onDeleteFoodFromCartById(food.id);
-          }
-        },
-        key: UniqueKey(),
-        background: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 25,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: const FaIcon(FontAwesomeIcons.trash),
-            ),
-          ],
-        ),
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: Theme.of(context).brightness == Brightness.light
-                ? Colors.white
-                : DarkThemeColor.primaryLight,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return ListView.separated(
+      padding: const EdgeInsets.all(30),
+      itemCount: cartIds.length,
+      itemBuilder: (_, index) {
+        final food = FoodState().foodById(cartIds[index]);
+        return Dismissible(
+          direction: DismissDirection.endToStart,
+          onDismissed: (direction) {
+            if (direction == DismissDirection.endToStart) {
+              print('Удаляем');
+              onDeleteFoodFromCartById(food.id);
+            }
+          },
+          key: UniqueKey(),
+          background: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const SizedBox(width: 20),
-              Image.asset(food.image, scale: 10),
-              const SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    food.name,
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    "\$${food.price}",
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ],
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 25,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const FaIcon(FontAwesomeIcons.trash),
               ),
-              const Spacer(),
-              Column(
-                children: [
-                  CounterButton(
-                    onIncrementTap: () => onIncrementTap(cartIds[index]),
-                    onDecrementTap: () => onDecrementTap(cartIds[index]),
-                    size: const Size(24, 24),
-                    padding: 0,
-                    label: Text(
-                      food.quantity.toString(),
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                  ),
-                  Text(
-                    "\$${FoodState().calculatePricePerEachItem(food)}",
-                    style: AppTextStyle.h2Style
-                        .copyWith(color: LightThemeColor.accent),
-                  )
-                ],
-              )
             ],
           ),
-        ),
-      );
-    },
-    separatorBuilder: (_, __) => Container(
-      height: 20,
-    ),
-  );
-}
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.white
+                  : DarkThemeColor.primaryLight,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(width: 20),
+                Image.asset(food.image, scale: 10),
+                const SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      food.name,
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      "\$${food.price}",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Column(
+                  children: [
+                    CounterButton(
+                      onIncrementTap: () => onIncrementTap(cartIds[index]),
+                      onDecrementTap: () => onDecrementTap(cartIds[index]),
+                      size: const Size(24, 24),
+                      padding: 0,
+                      label: Text(
+                        food.quantity.toString(),
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                    ),
+                    Text(
+                      "\$${FoodState().calculatePricePerEachItem(food)}",
+                      style: AppTextStyle.h2Style
+                          .copyWith(color: LightThemeColor.accent),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      separatorBuilder: (_, __) => Container(
+        height: 20,
+      ),
+    );
+  }
 
   Widget _bottomAppBar() {
     return ClipRRect(
@@ -237,7 +241,7 @@ class CartScreenState extends State<CartScreen> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: onCleanCart,
                               child: const Text("Checkout"),
                             ),
                           ),

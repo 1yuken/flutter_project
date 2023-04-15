@@ -29,6 +29,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
       ),
     );
   }
+
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       title: Text(
@@ -39,36 +40,40 @@ class FavoriteScreenState extends State<FavoriteScreen> {
   }
 
   Widget _favoriteListView() {
-  return ListView.separated(
-    padding: const EdgeInsets.all(30),
-    itemCount: favoriteFood.length,
-    itemBuilder: (_, index) {
-      Food food = favoriteFood[index];
-      return Card(
-        color: Theme.of(context).brightness == Brightness.light ? Colors.white : 
-        DarkThemeColor.primaryLight,
-        shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: ListTile(
-          title: Text(
-            food.name,
-            style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        leading: Image.asset(food.image),
-        subtitle: Text(
-          food.description,
-          overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-        trailing: const Icon(AppIcon.heart, color: Colors.redAccent),
-      ),
-      );
-    },
+    return ListView.separated(
+      padding: const EdgeInsets.all(30),
+      itemCount: favoriteFood.length,
+      itemBuilder: (_, index) {
+        Food food = favoriteFood[index];
+        return Card(
+          color: Theme.of(context).brightness == Brightness.light
+              ? Colors.white
+              : DarkThemeColor.primaryLight,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: ListTile(
+            title: Text(
+              food.name,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            leading: Image.asset(food.image),
+            subtitle: Text(
+              food.description,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            trailing: const Icon(AppIcon.heart, color: Colors.redAccent),
+          ),
+        );
+      },
       separatorBuilder: (_, __) => Container(
-      height: 20,
-    ),
-  );
-}
+        height: 20,
+      ),
+    );
+  }
 
+  void update() {
+    setState(() {});
+  }
 }

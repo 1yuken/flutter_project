@@ -46,12 +46,16 @@ class FoodDetailState extends State<FoodDetail> {
     await FoodState().onAddToCartTap(foodId, _amount);
   }
 
+  void onAddDeleteFavorite() async {
+    await FoodState().onAddDeleteFavoriteTap(foodId);
+    setState(() {});
+  }
 
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       // leading: IconButton(
-        // onPressed: () {},
-        // icon: const Icon(Icons.arrow_back),
+      // onPressed: () {},
+      // icon: const Icon(Icons.arrow_back),
       // ),
       title: Text(
         'Food Detail Screen',
@@ -70,112 +74,113 @@ class FoodDetailState extends State<FoodDetail> {
     return FloatingActionButton(
       elevation: 0.0,
       backgroundColor: LightThemeColor.accent,
-      onPressed: () {},
+      onPressed: onAddDeleteFavorite,
       child: food.isFavorite
           ? const Icon(AppIcon.heart)
           : const Icon(AppIcon.outlinedHeart),
     );
   }
-  
-Widget _bottomAppBar() {
-  return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(30),
-        topRight: Radius.circular(30),
-      ),
-      child: BottomAppBar(
-          child: SizedBox(
-              height: 300,
-              child: Container(
-                color: Theme.of(context).brightness == Brightness.dark ? DarkThemeColor.primaryLight : Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            RatingBar.builder(
-                              itemPadding: EdgeInsets.zero,
-                              itemSize: 20,
-                              initialRating: food.score,
-                              minRating: 1,
-                              direction: Axis.horizontal,
-                              allowHalfRating: true,
-                              itemCount: 5,
-                              glow: false,
-                              ignoreGestures: true,
-                              itemBuilder: (_, __) => const FaIcon(
-                                FontAwesomeIcons.solidStar,
-                                color: LightThemeColor.yellow,
+
+  Widget _bottomAppBar() {
+    return ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+        child: BottomAppBar(
+            child: SizedBox(
+                height: 300,
+                child: Container(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? DarkThemeColor.primaryLight
+                      : Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              RatingBar.builder(
+                                itemPadding: EdgeInsets.zero,
+                                itemSize: 20,
+                                initialRating: food.score,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                glow: false,
+                                ignoreGestures: true,
+                                itemBuilder: (_, __) => const FaIcon(
+                                  FontAwesomeIcons.solidStar,
+                                  color: LightThemeColor.yellow,
+                                ),
+                                onRatingUpdate: (rating) {
+                                  // ignore: avoid_print
+                                  print('$rating');
+                                },
                               ),
-                              onRatingUpdate: (rating) {
-                                // ignore: avoid_print
-                                print('$rating');
-                              },
-                            ),
-                            const SizedBox(width: 15),
-                            Text(
-                              food.score.toString(),
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            const SizedBox(width: 5),
-                            Text(
-                              "(${food.voter})",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "\$${food.price}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge
-                                  ?.copyWith(color: LightThemeColor.accent),
-                            ),
-                            CounterButton(
-                              onIncrementTap: onIncrementTap,
-                              onDecrementTap: onDecrementTap,
-                              label: Text(
-                                _amount.toString(),
-                                style: Theme.of(context).textTheme.displayLarge,
+                              const SizedBox(width: 15),
+                              Text(
+                                food.score.toString(),
+                                style: Theme.of(context).textTheme.titleMedium,
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        Text(
-                          "Description",
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                        const SizedBox(height: 15),
-                        Text(
-                          food.description,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const SizedBox(height: 30),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 45,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: ElevatedButton(
-                              onPressed: onAddToCart,
-                              child: const Text("Add to cart"),
+                              const SizedBox(width: 5),
+                              Text(
+                                "(${food.voter})",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "\$${food.price}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge
+                                    ?.copyWith(color: LightThemeColor.accent),
+                              ),
+                              CounterButton(
+                                onIncrementTap: onIncrementTap,
+                                onDecrementTap: onDecrementTap,
+                                label: Text(
+                                  _amount.toString(),
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Text(
+                            "Description",
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                          const SizedBox(height: 15),
+                          Text(
+                            food.description,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          const SizedBox(height: 30),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 45,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 30),
+                              child: ElevatedButton(
+                                onPressed: onAddToCart,
+                                child: const Text("Add to cart"),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ))));
-}
-
-
-
+                ))));
+  }
 }

@@ -99,4 +99,14 @@ class FoodState {
     }
     cartIds = [];
   }
+
+  Future<void> onAddDeleteFavoriteTap(int id) async {
+    if (favoriteIds.contains(id)) {
+      favoriteIds.remove(id);
+    } else {
+      favoriteIds.add(id);
+    }
+    final food = foodById(id);
+    food.isFavorite = !food.isFavorite;
+  }
 }

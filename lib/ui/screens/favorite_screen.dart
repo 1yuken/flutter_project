@@ -42,9 +42,9 @@ class FavoriteScreenState extends State<FavoriteScreen> {
   Widget _favoriteListView() {
     return ListView.separated(
       padding: const EdgeInsets.all(30),
-      itemCount: favoriteFood.length,
+      itemCount: favoriteIds.length,
       itemBuilder: (_, index) {
-        Food food = favoriteFood[index];
+        Food food = FoodState().foodById(favoriteIds[index]);
         return Card(
           color: Theme.of(context).brightness == Brightness.light
               ? Colors.white

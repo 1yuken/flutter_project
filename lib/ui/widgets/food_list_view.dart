@@ -26,9 +26,11 @@ class FoodListView extends StatelessWidget {
                 ? FoodState().foodById(foodIds.reversed.toList()[index])
                 : FoodState().foodById(foodIds[index]);
             return GestureDetector(
-              onTap: () {
+              onTap: () async {
                 // ignore: avoid_print
                 print('Клик на карточку');
+                await FoodState().onFoodTap(food.id);
+                // ignore: use_build_context_synchronously
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const FoodDetail()),
                 );
